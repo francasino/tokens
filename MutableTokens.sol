@@ -99,7 +99,7 @@ contract MutableTokens{
     }
     
     // add pedigree item to a token, updates hash
-    function addPedigree (uint _tokenId, string memory _id_pedigree_token, uint memory _quantity, string memory _timestamp) public {
+    function addPedigree (uint memory _tokenId, uint memory _id_pedigree_token, uint memory _quantity, string memory _timestamp) public {
         /*require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
         require(msg.sender == tokens[_tokenId].owner); //Only token creator can modify it. We can relax this after
         require(true==tokens[_tokenId].active); //  only if active
@@ -115,7 +115,7 @@ contract MutableTokens{
         emit updateEvent(); // trigger event 
     }
 
-    function addPedigreeElemental (uint _tokenId, string memory _id_product, uint memory _quantity, string memory _timestamp) public {
+    function addPedigreeElemental (uint memory _tokenId, uint memory _id_product, uint memory _quantity, string memory _timestamp) public {
         /*require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
         require(msg.sender == tokens[_tokenId].owner); //Only token creator can modify it. We can relax this after
         require(true==tokens[_tokenId].active); 
@@ -148,8 +148,29 @@ contract MutableTokens{
 
         emit updateEvent(); // trigger event 
     }
+
+    function addProcess (uint memory _tokenId, uint memory _pId) public {
+        /*require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
+        require(msg.sender == tokens[_tokenId].owner); //Only token creator can modify it. We can relax this after
+        require(true==tokens[_tokenId].active); //  only if active
+        */
+        tokens[_tokenId].processestoken.push(_pId);
+
+
+        emit updateEvent(); // trigger event 
+    }
+
+    function addStakeholder (uint memory _tokenId, uint memory _pId) public {
+        /*require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
+        require(msg.sender == tokens[_tokenId].owner); //Only token creator can modify it. We can relax this after
+        require(true==tokens[_tokenId].active); //  only if active
+        */
+        tokens[_tokenId].stakeholderstoken.push(_pId);
+
+        emit updateEvent(); // trigger event 
+    }
     
-    function changeStatusToken (uint _tokenId, bool _active) public { 
+    function changeStatusToken (uint memory _tokenId, bool memory _active) public { 
         require(_tokenId > 0 && _tokenId <= tokensCount);
 
         tokens[_tokenId].active = _active;  
@@ -165,7 +186,7 @@ contract MutableTokens{
     
     // getters structs of a token
     // get the array of pedigrees of a product, later we can loop them using getters to obtain the data
-    function getPedigreeToken (uint _tokenId) public view returns (uint [] memory)  {
+    function getPedigreeToken (uint memory _tokenId) public view returns (uint [] memory)  {
         require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
         require(msg.sender == tokens[_tokenId].owner); 
        
@@ -173,7 +194,7 @@ contract MutableTokens{
     }
     
     // get the array of changes of a product, later we can loop them using getters to obtain the data
-    function getProcessesToken (uint _tokenId) public view returns (uint [] memory)  {
+    function getProcessesToken (uint memory _tokenId) public view returns (uint [] memory)  {
         require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
         require(msg.sender == tokens[_tokenId].owner); 
         
@@ -181,7 +202,7 @@ contract MutableTokens{
     }
     
     // get the array of changes of a product, later we can loop them using getters to obtain the data
-    function getStakeholderToken (uint _tokenId) public view returns (uint [] memory)  {
+    function getStakeholderToken (uint memory _tokenId) public view returns (uint [] memory)  {
         require(_tokenId > 0 && _tokenId <= tokensCount);  // security check avoid memory leaks
         require(msg.sender == tokens[_tokenId].owner); 
         
@@ -189,7 +210,7 @@ contract MutableTokens{
     }
     
     // getters specific number of story or status
-    function getPedigree (uint _pedigreeId) public view returns (Pedigree memory)  {
+    function getPedigree (uint memory _pedigreeId) public view returns (Pedigree memory)  {
         require(_pedigreeId > 0 && _pedigreeId <= pedigreeCount); 
         require(msg.sender==pedigreeChanges[_pedigreeId].maker); // only if he is the author of the content
         
