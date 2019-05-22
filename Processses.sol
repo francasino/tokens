@@ -70,12 +70,12 @@ contract Processes{
     }
 
     // we add a token to a process to keep track of it
-    function addProcessToken(uint _id) public {
+    function addProcessToken(uint memory _id) public {
         processChanges[processCount].involvedtokens.push(_id);
         emit updateEvent(); // trigger event 
     }
 
-    function changeStatus (uint _id, bool _active) public { 
+    function changeStatus (uint memory _id, bool memory _active) public { 
         require(_id > 0 && _id <= processCount); 
 
         processChanges[processCount].active = _active;
@@ -83,14 +83,14 @@ contract Processes{
     }
     
     // get the products managed by the process
-    function getStakeholdersToken (uint _id) public view returns (uint [] memory)  {
+    function getStakeholdersToken (uint memory _id) public view returns (uint [] memory)  {
         require(_id > 0 && _id <= processCount);  // security check avoid memory leaks
         require(msg.sender == processChanges[_id].maker);
         
         return processChanges[_id].involvedtokens;
     }
 
-    function getProcess (uint _processId) public view returns (Process memory)  {
+    function getProcess (uint memory _processId) public view returns (Process memory)  {
         require(_processId > 0 && _processId <= processCount); 
         require(msg.sender==processChanges[_processId].maker); // only if he is the author of the content
         
