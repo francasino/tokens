@@ -65,27 +65,27 @@ contract Stakeholders{
         emit updateEvent(); // trigger event 
     }
 
-    function addStakeholderToken(uint _id) public {
+    function addStakeholderToken(uint memory _id) public {
 
         stakeholderChanges[stakeholderCount].involvedtokens.push(_id);
         emit updateEvent(); // trigger event 
     }
     
     // get the products managed by the stakeholder
-    function getStakeholdersToken (uint _id) public view returns (uint [] memory)  {
+    function getStakeholdersToken (uint memory _id) public view returns (uint [] memory)  {
         require(_id > 0 && _id <= stakeholderCount);  // security check avoid memory leaks
         require(msg.sender == stakeholderChanges[_id].maker);
         
         return stakeholderChanges[_id].involvedtokens;
     }
 
-    function changeStatus (uint _id, bool _active) public {
+    function changeStatus (uint memory _id, bool memory _active) public {
         require(_id > 0 && _id <= stakeholderCount); 
         stakeholderChanges[stakeholderCount].active = _active;
         emit changeStatusEvent(); // trigger event 
     }
 
-    function getStakeholder (uint _id) public view returns (Stakeholder memory)  {
+    function getStakeholder (uint memory _id) public view returns (Stakeholder memory)  {
         require(_id > 0 && _id <= stakeholderCount);  
         require(msg.sender == stakeholderChanges[_id].maker); // only if he is the author of the content
         
