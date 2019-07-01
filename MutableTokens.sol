@@ -6,7 +6,8 @@ pragma experimental ABIEncoderV2;
 COPYRIGHT FRAN CASINO. 2019.
 SECURITY CHECKS ARE COMMENTED FOR AN EASY USE TEST.
 UNCOMMENT THE CODE FOR A FULLY FUNCTIONAL VERSION. 
-YOU WILL NEED TO USE METAMASK OR OTHER EXTENSIONS TO USE THE REQUIRED ADDRESSES
+YOU WILL NEED TO USE METAMASK OR OTHER EXTENSIONS TO USE THE REQUIRED ADDRESSES. 
+FOR THE MOMENT, ADDRESSES ARE HARDCODED. DELETE THEM FOR FULL FUNCTIONALITY.
 
 
 ACTUALLY DATA ARE STORED IN THE SC. TO ENABLE IPFS, FUNCTIONS WILL NOT STORE the values and just the hash in the structs.
@@ -77,11 +78,12 @@ contract MutableTokens{
     event changeStatusEvent ( // triggers status change
     );
 
+    // addresses are hardcoded to ease testing. Just delete them afterwards. 
     address constant public stakeholder = 0xE0f5206BBD039e7b0592d8918820024e2a7437b9; // who registers the token into system. 
     address constant public stakeholder2 = 0xE0F5206bbd039e7b0592d8918820024E2A743222;
 
     constructor () public { // constructor, inserts new token in system. we map starting from id=1, hardcoded values of all
-        addToken("Ketchup","Tomato based sauce","1130009112019"); //
+        addToken("Ketchup","Tomato based sauce","1130009112019"); // initial token. Example. Can be edited to insert a generic initial token
         
     }
     
